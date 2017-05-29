@@ -11,9 +11,49 @@ content: '''
   * Đo đạc xác suất: Một hàm $$P: F \\to IR$$ thỏa mãn các đặc tính sau:
     
       $$P(A) \\geq 0, for all A \\in F$$
-      Nếu $$A_1, A_2, ...$$ là những sự kiện không giao nhau (nghĩa là $$A_i \\cap A_j = \\empty$$ whenever $$i != j$$
+      Nếu $$A_1, A_2, ...$$ là những sự kiện không giao nhau (nghĩa là $$A_i \\cap A_j = \\emptyset$$ với $$i \\neq j$$ thì $$P(\\cup_i A_i) = \\sum_i P(A_i)$$
+      
+      $$P(\\Omega) = 1$$
+      
+    Ba đặc tính này gọi là *Tiên đề của xác suất*
+    
+    Ví dụ: Xem xet sự kiện tung xúc xắc 6 mặt. Tập mẫu là $$\\Omega = \\{1,2,3,4,5,6\\}$$. Chúng ta có thể định nghĩa các tập sự kiện trên tập mẫu này. Ví dụ, tập sự kiện đơn giản nhất có thể là $$F = \\{\\varnothing, \\Omega \\}$$. Các tập sự kiện khác là tập hợp các tập con của $$\\Omega$$. Với tập sự kiện đầu tiên, xác suất đo đạc duy nhất thỏa mãn yêu cầu trên là $$P(\\varnothing)=0, P(\\Omega)=1$$. Với tập sự kiện thứ hai, xác suất đo đạt đúng gán cho mỗi tập thuộc tập sự kiện sẽ bằng $$\\frac{i}{6}$$ tron đó $$i$$ là số phần tử của tập đó. ví dụ,
+  $$P(1,2,3,4)= \\frac{4}{6}$$ và $$P(1,2,3)=\\frac{3}{6}$$
+  
+  ### Đặc điểm
+  * Nếu $$A \\subseteq B \\Rightarrow P(A) \\leq P(B)$$
+  * $$P(A \\cap B) \\leq \\min(P(A), P(B))$$
+  * **Union bound** $$P(A \\cap B) \\leq P(A) + P(B).
+  $$$
+  P(\\Omega - A) = 1 -P(A)
+  $$$
+  * **Luật của xác suất tổng** Nếu $$A_1, ...,A_k$$ là tập hợp các sự kiện độc lập,, $$\\cup_{i=1}^{k} A_i = \\Omega$$ thì $$\\sum_{i=1}^{k} P(A_k) = 1$$
+  
+  ### 1.1 Xác suất điều kiện
+  
+  Giả sử $$B$$ là một sự kiện với xác suất khác 0. Xác suất điều kiện của bất kỳ sự kiện $$A$$ dựa trên $$B$$ được định nghĩa là $$P(A|B)=\\frac{P(A\\cap B)}{P(B)}$$. Nói các khác, $$P(A|B)$$ là xác suất đo của sự kiện A sau khi quan sát sự xuất hiện của sự kiên $$B$$
+  
+  Ví dụ : Giả sử quan sát thấy tổng 2 xúc xác là 2. Vậy xác suất để 1 cục tung ra mặt 6 là bằng 0. Vì khi xúc xăc tung ra bằng 2, thì chỉ xảy ra duy nhất trường hợp 2 xúc xắc đều ra 1
+  
+  ### 1.2 Luật chuỗi
+  Với $$S_1,...,S_k$$ là các sự kiện, $$P(S_i) > 0$$. Thì
+  $$$
+  P(S_1 \\cap S_2 \\cap ...\\cap S_k) = P(S_1)P(S_2|S_1)P(S_3|S_2 \\cap S_1)...P(S_n|S_1 \\cap S_2 \\cap ... S_{n-1})
+  $$$
+  Lưu ý với $$k=2$$, đây đơn giản là định nghĩa của xác suất điều kiện
+  $$$
+  P(S_1 \\cap S_2) = P(S_1)P(S_2|S_1)
+  $$$
+  
+  Một cách tổng quát, có thể biểu dưới luật chuỗi bằng cách định nghĩa xác suất điều kiện nhiều lần:
+  $$$
+  P(S_1 \\cap S_2 \\cap S_3 \\cap S_4) = P(S_1 \\cap S_2 \\cap S_3) P(S_4|S_1 \\cap S_2 \\cap S_3) = P(S_1 \\cap S_2) P(S3|S_1 \\cap S_2)P(S_4|S_1 \\cap S_2 \\cap S_3) = P(S_1) P(S_2|S_1) P(S3|S_1 \\cap S_2)P(S_4|S_1 \\cap S_2 \\cap S_3)
+  $$$
+  
+  ### 1.3 Độc lập xác suất
+  Hai sự kiện được gọi là độc lấp nếu và chỉ nếu $$P(A \\cap B) = P(A)P(B)$$ (hoặc tương đương, $$P(A|B) = P(A)$$. Vì thế độc lập tương đương với việc quan sát thấy B không có ảnh hưởng tới xác suất của A
 '''
 tags: []
 isStarred: false
 createdAt: "2017-05-29T08:36:32.221Z"
-updatedAt: "2017-05-29T09:08:32.266Z"
+updatedAt: "2017-05-29T10:29:48.815Z"

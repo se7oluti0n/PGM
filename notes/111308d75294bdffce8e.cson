@@ -1,0 +1,68 @@
+type: "MARKDOWN_NOTE"
+folder: "15193ea58a5d7f1a67c1"
+title: "Introduction"
+content: '''
+  Introduction
+  ============
+  *Mô hình đồ thị xác suất* là một nhánh của *Học máy*, nghiên cứu xem làm thể nào để dùng phân bố xác suất để diễn tả lại thế giới và tạo ra được các dự đoán có ích về thế giới
+  
+  Có nhiều lý do để học về mô hình xác suất. Một trong số đó là, mô hình xác suất là một ngành khoa học hấp dẫn đi kèm với một lý thuyết đẹp, kết nối 2 nhánh hoàn toàn khác biệt của toán học: xác suất và lý thuyết đồ thị. Mô hình xác suất còn có một mối quan hệ kỳ lạ với Triết học, cụ thể là câu hỏi về quan hệ nhân quả.
+  
+  Mô hình xác suất được sử dụng rộng rãi trong *Học máy* và nhiều ứng dụng thực tế. Những kỹ thuật này được ứng dụng trong nhiều ngành đa dạng, ví dụ : y học, xứ lý ngôn ngữ, vision, ..
+  
+  Sự kết hợp giữa lý thuyết tinh tế và khả năng ứng dụng mạnh mẽ khiến cho *Mô hình đồ thị xác suất* là một trong những chủ đề hấp dẫn nhất trong ngành *Học máy* hiện đài và khoa học máy tính.
+  
+  ## *Mô hình xác suất*
+  Nhưng trước hết, chĩnh xác thì mô hình xác suất là cái gì?
+  
+  Khi giải quyết một vấn đề thực tế sử dụng công cụ toán học, một điều rất phổ biến đó là mô hình thế giới dưới dạng một phương trình toán học. Có lẽ mô hình đơn giản nhất là phương trình tuyến tính 
+  $$$y = \\beta^T x$$$
+  
+  Trong đó $$y$$ là một biến đầu ra ta muốn dự đoán, và $$x$$ là những biến số đã biết có ảnh hưởng tới đầu ra. Ví dụ, $$y$$ có thể là giá tiền của một ngồi nhà, và $$x$$ là một chuỗi các yếu tố ảnh hưởng tới giá tiền này, ví dụ, vị trí, số phòng ngủ, tuổi đời của ngôi nhà, vv. Ta giả sử rằng $$y$$ là một phương trình tuyến tính của đầu vào này (với tham số là $$\\beta$$).
+  
+  Thế giới mà chúng ta cố gắng mô hình hóa thường lại rất phức tạp, nó thường liên quan đến một lượng đáng kể sự ngẫu nhiên (ví dụ: giá của một ngôi nhà sẽ tăng lên nếu có một ga tàu được mở ở khu vực gần đó). Vì thế một lẽ rất tự nhiên để đối phó với sự ngẫu nhiên này là mô hình thế giới dưới dạng một phân bố xác suất
+  $$$ p(x,y) $$$
+  
+  Với mô hình này, chúng ta có thể đặt câu hỏi như "Xác suất của việc giá ngôi nhà sẽ tăng sau 5 năm nữa là bao nhiêu", hoặc "Giả sử giá ngôi nhà là $100,000, Xác suất nó có 3 phòng ngủ là bao nhiều?" Khía cạnh xác suất của mô hình rất quan trọng bởi vì:
+  
+  * Thường thì ta không thể dự đoán tương lai một cách chính xác. Ta không có đủ thông tin về thế giới, và bản thân thế giới cũng rất ngẫu nhiên
+  * Chúng ta cần biết về độ tự tin của dự đoán; Chỉ dự đoán 1 con số là không đủ, chúng ta cần một hệ thống có thể cho ra cách nó nhìn về những gì đang diễn ra trên thế giới
+  
+  Trong khóa học này, chúng ta sẽ học những nguyên tắc để có thể lập luận về sự ngẫu nhiên và sử dụng những ý tưởng từ cả xác suất và lý thuyết đồ thị để có thể cho ra những thuật toán *học máy* giải quyết vấn đề này. Chúng ra sẽ tìm được câu trả lời cho nhiều câu hỏi thú vị, ví dụ: 
+  
+  * Sự đánh đổi giữa độ phức tạp tính toán và sự mạnh mẽ của mô hình xác suất là gì?
+  * Với một dữ liệu và khả năng tính toán là như thế này, thì mô hình tốt nhất có thể suy đoán về tương lai là mô hình như thế nào?
+  * Làm thế nào để kết hợp với những hiểu biết đã có và những chứng cứ quan sát được để đưa một cách có nguyên tắc các dự đoán?
+  * Làm thế nào chúng ta có thể nghiêm túc phân tích xem A là nguyên nhân của B hay là ngược lại?
+  
+  Thêm nữa, chúng ra sẽ được thấy nhiều ví dụ về việc làm thế nào để ứng dụng các kỹ thuật xác suất vào nhiều vấn đề, ví dụ như dự đoán bệnh lý, phân tích hình ảnh, phân tích ngôn ngữ, vv
+  
+  ## Những khó khăn trong việc mô hình hóa xác suất
+  
+  Để có được những cảm nhận đầu tiền về những thử thách phía trước, ta sẽ xem xét một ứng dụng đơn giản trong mô hình hóa xác suất: Phân loại thư rác
+  
+  Giả sử ta có một mô hình $$p(y,x_1,...,x_n)$$ của các từ xuất hiện trong thư rác và thư bình thường. Mỗi biến nhị phân $$x_i$$ sẽ mã hóa xem từ tiếng anh thứ $$i$$ có xuất hiện trong email hay không; Biến nhị phân $$y$$ xác định xem email có phải là *thư rác* hay không. Để phân loại một thư mới, ta có thể nhìn vào xác suất $$P(y=1|x_1,...,x_n)$$
+  
+  Vậy *Kích thước* của hàm $$p_{\\theta}$$ ta vừa định nghĩa là gì? 
+  
+  Mô hình của chúng ta đã định nghĩa 1 xác suất thuộc $$[0,1]$$ cho tất cả các tổ hợp của đầu vào $$y,x_1,...,x_n$$; tính đến tất cả các xác suất đó sẽ cần chúng ta phải liệt kê $$2^{n+1}$$ giá trị khác nhau, mỗi giá trị ứng với 1 tổ hợp của $$n+1$$ biến nhị phân. Vì $$n$$ là kích thước của từ điển tiếng Anh, nên đây rõ ràng là không khả thi kể cả trong quan điểm tính toán (làm thế nào có thể lưu được danh sách lớn đến vậy) lẫn quan điểm thống kê (làm sao ta có thể ước lượng hiệu quả tham số với chỉ lượng dữ liệu giới hạn). Tổng quát hơn, ví dụ của chúng ta đã cho thấy một trong những thử thách mà khóa học này sẽ đề ra, đó là: Xác suất là những đối tượng có kích thước thừa kế cấp số nhân; cách duy nhất để xử lý chúng là tạo ra những giả định đơn giản hơn về cấu trúc của chúng.
+  
+  Giả định đơn giản hóa chính mà ta sẽ tạo ra trong khóa học này đó là *Độc lập có điều kiện* giữa các biến số. Ví dụ, với $$Y$$ cho trước, các từ tiếng Anh là độc lập. Nói cách khác, giả sử thư là rác, xác suất để xuất hiện 2 từ là độc lập. Giả thiết này rõ ràng là đơn giản quá mức, ví dụ: xác suất vủa từ "thuốc" và "mua" là có tương quan; tuy nhiên, với phần lớn các từ (ví dụ. "chim cánh cụt" và "bánh hoa quả") thì xác suất là độc lập, vì vậy giả thiết cảu chúng ta không làm giảm đáng kể độ chính xác của mô hình.
+  
+  Cách giả sử về sự độc lập giữa các biến được gọi là giả thiết *Naive Bayes*. Với giả thiết này, ta có thể viết mô hình xác suất đưới dạng tích cảu các phần tử
+  $$$
+  P(y,x_1,...,x_n) = p(y)\\prod_{i=1}^n p(x_i|y)
+  $$$
+  Mỗi phần tử $$p(x_i|y)$$ có thể hoàn toàn được diễn tả bởi số nhỏ các tham số (chính xác là 4 tham số với 2 bậc tự do). Toàn bộ phân bố được tham số hóa bằng $$O(n)$$ tham số, ta có thể ước lượng từ tham số và tạo ra dự đoán từ đó.
+  
+  ## Diễn giải xác suất với đồ thị
+  Giả thiết về sự độc lập kia có thể biểu diễn dưới dạng đồ thị. Cách biểu diễn này có một lợi thế rõ ràng đó là dễ hiểu. Nó có thể được hiểu như kể một câu chuyện: Một email được tạo ra bằng cách, trước hết chọn ngẫu nhiên xem email đó là rác hay không (xác định bởi $$y$$) sau đó lấy mẫu các từ một lần một lúc. Ngược lại, nếu ta có câu chuyện về việc làm thế nào dữ liệu được tạo ra, ta có thể diễn tả nó một cách tự nhiên bằng đồ thị với một phân phối xác suất đi kèm. 
+  
+  Quan trọng hơn, ta muốn đưa ra các truy vấn khác nhau với mô hình (ví dụ, xác suất của thư rác là bao nhiêu nếu ta nhìn thấy từ "thuốc"); trả lời những câu hỏi này sẽ cần những thuật toán đặc biết mà nó sẽ được định nghĩa tốt nhất sử dụng khái nhiệm lý thuyết đồ thị. Ta cũng sẽ sử dụng lý thuyết đồ thị để phân tích tốc độ của thuật toán học và để định ra độ phức tạp tính toán (ví dụ độ khó NP) của các tác vụ học khác nhau. 
+  
+  Điều ta muốn ghi nhớ ở đây đó là có một mối quan hệ mật thiết giữa phân bố xác suất và đồ thị sẽ được khám phá thông qua khóa học trong việc định nghĩa, học và làm việc với mô hình xác suất
+'''
+tags: []
+isStarred: false
+createdAt: "2017-05-29T04:10:20.554Z"
+updatedAt: "2017-05-29T06:43:49.049Z"

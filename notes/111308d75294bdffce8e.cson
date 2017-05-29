@@ -57,12 +57,42 @@ content: '''
   
   ## Diễn giải xác suất với đồ thị
   Giả thiết về sự độc lập kia có thể biểu diễn dưới dạng đồ thị. Cách biểu diễn này có một lợi thế rõ ràng đó là dễ hiểu. Nó có thể được hiểu như kể một câu chuyện: Một email được tạo ra bằng cách, trước hết chọn ngẫu nhiên xem email đó là rác hay không (xác định bởi $$y$$) sau đó lấy mẫu các từ một lần một lúc. Ngược lại, nếu ta có câu chuyện về việc làm thế nào dữ liệu được tạo ra, ta có thể diễn tả nó một cách tự nhiên bằng đồ thị với một phân phối xác suất đi kèm. 
-  
+  ![Biểu diễn đồ thị của mô hình phân loại thư rác với Naive Bayes. Chúng ta có thể hiểu đồ thị có hướng kia như một cách làm thế nào mà dữ liệu được tạo ra](https://ermongroup.github.io/cs228-notes/assets/img/naive-bayes.png)
   Quan trọng hơn, ta muốn đưa ra các truy vấn khác nhau với mô hình (ví dụ, xác suất của thư rác là bao nhiêu nếu ta nhìn thấy từ "thuốc"); trả lời những câu hỏi này sẽ cần những thuật toán đặc biết mà nó sẽ được định nghĩa tốt nhất sử dụng khái nhiệm lý thuyết đồ thị. Ta cũng sẽ sử dụng lý thuyết đồ thị để phân tích tốc độ của thuật toán học và để định ra độ phức tạp tính toán (ví dụ độ khó NP) của các tác vụ học khác nhau. 
   
   Điều ta muốn ghi nhớ ở đây đó là có một mối quan hệ mật thiết giữa phân bố xác suất và đồ thị sẽ được khám phá thông qua khóa học trong việc định nghĩa, học và làm việc với mô hình xác suất
+  
+  ## Tổng quan về khóa học
+  
+  Cuộc thảo luận về mô hình đồ thị sẽ được chia thành 3 phần lớn: *Biểu diễn* (làm thể nào để chỉ ra một mô hình), *suy luận* (làm thế để trả lời một câu hỏi với mô hình) và *học* (làm thế nào để tạo ra mô hình từ dữ liệu thực tế). Ba phần này có mối liên hệ gần gũi: để tạo ra được *suy luận* và thuật toán *học* hiệu quả, mô hình cần được *biểu diễn* đầu đủ; thêm nữa, việc *học* cho mô hình sẽ cần tới bước nhỏ là *suy luận*. Vì vậy, tốt nhất là giữ những phần này đồng thời, thay vì tách nhỏ nó thành những bước độc lập.
+  
+  ### Biểu diễn
+  Làm thế nào ta diễn đạt được mô hình xác suất có thể mô hình hóa một số khái nhiệm trong thế giới thực? Đây không phải là vấn đề đơn giản: Chúng ta đã thấy rằng mô hình *naive* để phân loại thư rác với $$n$$ từ cần tới $$O(2^n)$$ tham số. Chúng ta sẽ đề cập tới vấn đề này bằng những kỹ thuật tạo ra những mô hình khả thi. Những kỹ thuật này sẽ dùng thường xuyên dùng tới lý thuyết đồ thì; xác suất sẽ được diễn giải bằng đồ thì mà những thuộc tính của nó (ví dụ: các kết nối, độ rộng cây đồ thi) sẽ tiết lộ ra những thuộc tính về mặt xác suất và thuật toán của mô hình (ví dụ: tính độc lập, độ phức toán thuật toán học)
+  
+  ### Suy luận
+  
+  Với một mô hình xác suất, làm sao ta có thể trả lời được những câu hỏi có liên quan về thế giới? Những câu hỏi như thế có thể quy về việc tìm ra xác suất *marginal* hoặc xác suất điều kiện của các sự kiện được quan tâm. Cụ thể hơn chúng ta thường thích đặt ra 2 loại câu hỏi như sau:
+  
+  * Suy luận biên: Xác suất của một biến số trong mô hình là gì giả sử ta đã biết tất cả các biến còn lại
+  $$$
+  p(x_1) = \\sum_{x_2}\\sum_{x_3}...\\sum_{x_n}p(x_1,x_2,..., x_n)
+  $$$
+  Ví dụ : Xác định xác suất của một ngôi nhà bất kỳ có hơn 3 phòng ngủ
+  
+  * Cực đại hóa một suy luận hậu : Xác định giá trị biến số mà có khả năng xảy ra nhất. Ví dụ, xác định thư có khả năng cao nhất, sẽ giải quyết vấn đề sau.
+  
+  $$$
+  \\max_{x_1,..., x_n} p(x_1,...,x_n, y=1)
+  $$$
+  
+  Hóa ra suy luận lại là một vấn đề rất khó. Với nhiều xác suât, sẽ là vấn đề có độ khó $$NP$$ để tìm ra xác suất đó. Vấn đề chủ yeus là, việc suy luận có khả thi hay không sẽ phụ thuộc vào cấu trúc của đồ thị diễn giải suy luận đó. Nếu vấn đề là không khả thi, ta vẫn có thể tìm ra được một câu trả lời có ích bằng phương pháp suy luận xấp xỉ. Thú vị là thuật toán diễn giải phần này của khóa học sẽ chủ yếu dựa trên các nghiên cứu đã được thực hiện trong cộng đồng vật lý thống kê vào những năm giữa thế kỷ 20.
+  
+  ### Học
+  Phần chính cuối cùng sẽ liên quan tới việc gắn một mô hình với một tập dữ liệu, có thể là một số lượng lớn các mẫu về thư rác. Bằng cách nhìn vào dữ liệu, ta có thể tìm ra những đặc tính hữu dụng ( ví dụ: từ nào thường được tìm thấy trong các thư rác), mà ta có thể dùng để tạo ra các suy đoán về tương lai. Tuy nhiên, ta sẽ thấy rằng *học* và *suy luân* có liên hệ một cách tinh tế hơn, vì *suy luận* thực ra là một bước nhỏ trong *học* mà ta sẽ gọi đi gọi lại trong thuật toán học. Ngoài ra chủ đề *học* cũng sẽ nhấn mạnh mối liên hệ quan trọng tới lý thuyết học tính toán - trong đó sẽ trả lời các câu hỏi về khả năng suy luận từ một tập dữ liệu giới hạn, overfitting, cũng như liên quan tới thống kê Bayes, trong đó sẽ giúp ta làm sao để kết hợp hiểu biết cho trước với dữ liệu quan sát được theo một cách có nguyên tắc.
+  
+  
 '''
 tags: []
 isStarred: false
 createdAt: "2017-05-29T04:10:20.554Z"
-updatedAt: "2017-05-29T06:43:49.049Z"
+updatedAt: "2017-05-29T08:51:11.853Z"

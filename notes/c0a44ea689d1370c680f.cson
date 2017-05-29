@@ -1,0 +1,19 @@
+type: "MARKDOWN_NOTE"
+folder: "15193ea58a5d7f1a67c1"
+title: "Probability review"
+content: '''
+  Probability review
+  ==================
+  ## 1. Các thành phần của Xác suất
+  
+  * Tập mẫu $$\\Omega$$: Tập của tất cả các đầu ra có thể của một thí nghiệm ngẫu nhiên. Tại đây, mỗi đầu ra $$\\omega\\in\\Omega$$ có thể được xem như một diễn tả hoàn thiện về trạng thái của thế giới thật khi thí nghiệm kết thúc.
+  * Tập các sự kiện $$F$$: Một tập trong đó phần từ $$A\\in F$$ là tập con của $$\\Omega$$ (ví dụ: $$A \\subseteq \\Omega$$ là một bộ sưu tập các đầu ra có thể của một thí nghiệm) 
+  * Đo đạc xác suất: Một hàm $$P: F \\to IR$$ thỏa mãn các đặc tính sau:
+    
+      $$P(A) \\geq 0, for all A \\in F$$
+      Nếu $$A_1, A_2, ...$$ là những sự kiện không giao nhau (nghĩa là $$A_i \\cap A_j = \\empty$$ whenever $$i != j$$
+'''
+tags: []
+isStarred: false
+createdAt: "2017-05-29T08:36:32.221Z"
+updatedAt: "2017-05-29T09:08:32.266Z"
